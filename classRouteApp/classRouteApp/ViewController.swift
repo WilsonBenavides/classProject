@@ -26,15 +26,32 @@ class ViewController: UIViewController {
         
         redView.translatesAutoresizingMaskIntoConstraints = false
         
-        redView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 12), size: .init(width: 100, height: 100))
+        redView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 12), size: .init(width: 125 , height: 0))
+        redView.heightAnchor.constraint(equalTo: redView.widthAnchor).isActive = true
         
-        blueView.anchor(top: redView.bottomAnchor, leading: nil, bottom: nil, trailing: redView.trailingAnchor, padding: .init(top: 12, left: 0, bottom: 0, right: 0), size: .init(width: 100, height: 100))
+        blueView.anchor(top: redView.bottomAnchor, leading: nil, bottom: nil, trailing: redView.trailingAnchor, padding: .init(top: 12, left: 0, bottom: 0, right: 0))
+        blueView.anchorSize(to: redView)
         
         greenView.anchor(top: redView.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: blueView.bottomAnchor, trailing: redView.leadingAnchor, padding: .init(top: 0, left: 12, bottom: 0, right: 12))
+        
+        let purpleView = UIView()
+        purpleView.backgroundColor = .purple
+        view.addSubview(purpleView)
+        purpleView.fillSuperview()
     }
 }
 
 extension UIView {
+    
+    func fillSuperview() {
+        anchor(top: superview?.topAnchor, leading: superview?.leadingAnchor, bottom: superview?.bottomAnchor, trailing: superview?.trailingAnchor)
+    }
+    
+    func anchorSize(to view: UIView) {
+        widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+    }
+    
     func anchor(top: NSLayoutYAxisAnchor?, leading: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, trailing: NSLayoutXAxisAnchor?, padding: UIEdgeInsets = .zero, size: CGSize = .zero) {
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -50,14 +67,9 @@ extension UIView {
         if let trailing = trailing {
             trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).isActive = true
         }
-        
-        
-        
-        
         if size.width != 0 {
             widthAnchor.constraint(equalToConstant: size.width).isActive = true
         }
-        
         if size.height != 0 {
             heightAnchor.constraint(equalToConstant: size.height).isActive = true
         }
