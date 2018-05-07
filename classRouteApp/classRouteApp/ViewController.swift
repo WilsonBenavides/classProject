@@ -16,17 +16,17 @@ class ViewController: UIViewController {
         let redView = UIView()
         redView.backgroundColor = .red
         
-        view.addSubview(redView)
+        let blueView = UIView()
+        blueView.backgroundColor = .blue
+        
+        [redView, blueView].forEach { view.addSubview($0)}
         
         redView.translatesAutoresizingMaskIntoConstraints = false
         
         redView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 12), size: .init(width: 100, height: 100))
-//        redView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        redView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        redView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        redView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-//        redView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 16), size: .init(width: 100, height: 100))
+        blueView.anchor(top: redView.bottomAnchor, leading: nil, bottom: nil, trailing: redView.trailingAnchor, padding: .zero, size: .init(width: 100, height: 100))
+        
     }
 }
 
